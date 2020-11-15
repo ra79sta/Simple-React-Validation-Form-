@@ -15,9 +15,23 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleValidation = this.handleValidation.bind(this);
     this.validate = this.validate.bind(this);
+    this.firstNumCheck = this.firstNumCheck.bind(this);
   }
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  firstNumCheck() {
+    let notAnum;
+    if (
+      this.state.phoneNumber.slice(0, 1) == 0 ||
+      this.state.phoneNumber.slice(0, 1) == 1
+    ) {
+      notAnum = false;
+    } else {
+      notAnum = true;
+    }
+    return notAnum;
   }
 
   validate() {
@@ -46,7 +60,8 @@ class Form extends Component {
     }
     if (
       phoneNumberPattern.test(this.state.phoneNumber) &&
-      this.state.phoneNumber.length == 10
+      this.state.phoneNumber.length == 10 &&
+      this.firstNumCheck()
     ) {
       isPhoneValid = true;
     }
